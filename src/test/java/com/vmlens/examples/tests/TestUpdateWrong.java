@@ -6,6 +6,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.junit.Test;
 import com.vmlens.api.AllInterleavings;
 
+/**
+ * 
+ * This example shows how to write multi-threaded tests with vmlens.
+ * It is <a href="https://vmlens.com/help/manual/#interleave">described here.</a>
+ * 
+ * @author thomas
+ *
+ */
+
+
 public class TestUpdateWrong {
 	public void update(ConcurrentHashMap<Integer, Integer> map) {
 		Integer result = map.get(1);

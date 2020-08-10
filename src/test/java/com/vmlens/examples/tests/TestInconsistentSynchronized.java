@@ -3,6 +3,16 @@ package com.vmlens.examples.tests;
 import org.junit.Test;
 import com.vmlens.api.AllInterleavings;
 
+/**
+ * 
+ * This example shows a data race because the access to the variable i is not correctly synchronized.
+ * It is <a href="https://vmlens.com/help/manual/#find_data_races">described here.</a>
+ * 
+ * 
+ * @author thomas
+ *
+ */
+
 public class TestInconsistentSynchronized {
 	private static final Object LOCK_1 = new Object();
 	private static final Object LOCK_2 = new Object();

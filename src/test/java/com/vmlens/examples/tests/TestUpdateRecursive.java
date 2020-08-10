@@ -9,6 +9,16 @@ import org.junit.Test;
 
 import com.vmlens.api.AllInterleavings;
 
+/**
+ * 
+ * This example shows how vmlens reports deadlocks during test runs.
+ * It is <a href="https://vmlens.com/help/manual/#find_deadlocks">described here</a>
+ * 
+ * @author thomas
+ *
+ */
+
+
 public class TestUpdateRecursive {
 	private final ConcurrentHashMap<Integer, Integer> 
 		map = new ConcurrentHashMap<Integer, Integer>();
