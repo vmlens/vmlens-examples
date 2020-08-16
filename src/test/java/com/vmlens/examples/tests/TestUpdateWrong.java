@@ -43,7 +43,7 @@ public class TestUpdateWrong {
 				first.join();
 				second.join();
 				assertEquals(2, 
-						map.get(1).intValue());
+				  map.get(1).intValue());
 			}
 		}
 	}
