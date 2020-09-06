@@ -45,7 +45,7 @@ public class TestUpdateRecursive {
 	@Test
 	public void testUpdate() throws InterruptedException {
 		try (AllInterleavings allInterleavings = 
-				 new AllInterleavings("TestUpdateRecursive");) {
+				 new AllInterleavings("tests.TestUpdateRecursive");) {
 			while (allInterleavings.hasNext()) {
 				Thread first = new Thread(() -> {
 					update12();

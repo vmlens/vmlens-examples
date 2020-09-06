@@ -72,7 +72,9 @@
 				<artifactId>interleave</artifactId>
 				<version>${project.version}</version>
      			<configuration>
-					<trimStackTrace>false</trimStackTrace>
+					<suppress>false
+						<race>com.vmlens.examples.config.TestSuppressDataRaceAtField.i</race>
+					</suppress>
 				</configuration>
 				<executions>
 					<execution>

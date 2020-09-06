@@ -28,7 +28,7 @@ public class TestUpdateWrong {
 	@Test
 	public void testUpdate() throws InterruptedException {
 		try (AllInterleavings allInterleavings = 
-				new AllInterleavings("TestUpdateWrong");) {
+				new AllInterleavings("tests.TestUpdateWrong");) {
 			while (allInterleavings.hasNext()) {
 				final ConcurrentHashMap<Integer, Integer> map = 
 						new ConcurrentHashMap<Integer, Integer>();
