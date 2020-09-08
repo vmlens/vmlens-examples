@@ -8,7 +8,7 @@ import com.vmlens.api.AllInterleavings;
 
 public class TestCounterVolatile {
 
-	int i = 0;
+	volatile int i = 0;
 
 	@Test
 	public void test() throws InterruptedException {

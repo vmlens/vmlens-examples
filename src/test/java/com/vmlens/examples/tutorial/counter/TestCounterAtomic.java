@@ -9,12 +9,12 @@ import org.junit.Test;
 import com.vmlens.api.AllInterleavings;
 
 public class TestCounterAtomic {
-
 	AtomicInteger i = new AtomicInteger();
-
 	@Test
 	public void test() throws InterruptedException {
-		try (AllInterleavings allInterleavings = new AllInterleavings("tutorial.counter.TestCounterAtomic");) {
+		try (AllInterleavings allInterleavings = 
+		   new AllInterleavings
+				("tutorial.counter.TestCounterAtomic");) {
 			while (allInterleavings.hasNext()) {
 				i.set(0);
 				Thread first = new Thread(() -> {

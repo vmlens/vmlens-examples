@@ -7,12 +7,11 @@ import org.junit.Test;
 import com.vmlens.api.AllInterleavings;
 
 public class TestCounterNonVolatile {
-
-	volatile int i = 0;
-
+	int i = 0;
 	@Test
 	public void test() throws InterruptedException {
-		try (AllInterleavings allInterleavings = new AllInterleavings("tutorial.counter.TestCounterNonVolatile");) {
+		try (AllInterleavings allInterleavings = 
+				new AllInterleavings("tutorial.counter.TestCounterNonVolatile");) {
 			while (allInterleavings.hasNext()) {
 				i = 0;
 				Thread first = new Thread(() -> {
