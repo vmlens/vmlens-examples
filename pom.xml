@@ -74,6 +74,7 @@
      			<configuration>
 					<suppress>
 						<race>com.vmlens.examples.config.TestSuppressDataRaceAtField.i</race>
+						<race>int[]@com.vmlens.examples.config.TestSuppressArrayWithAt.updateArray</race>
 					</suppress>
 				</configuration>
 				<executions>
