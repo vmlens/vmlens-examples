@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import com.vmlens.api.AllInterleavings;
 
-public class TestSuppressArrayWithAt {
+public class TestSuppressPrimitiveArrayWithAt {
 	
 	
 	private int[] array = new int[1];
@@ -19,7 +19,7 @@ public class TestSuppressArrayWithAt {
 	public void test() throws InterruptedException {
 		try (AllInterleavings allInterleavings = 
 				new AllInterleavings
-				("config.TestSuppressArrayWithAt");) {
+				("config.TestSuppressPrimitiveArrayWithAt");) {
 			while (allInterleavings.hasNext()) {
 				Thread first = new Thread(() -> {
 					updateArray();

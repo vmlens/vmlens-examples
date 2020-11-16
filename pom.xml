@@ -74,7 +74,8 @@
      			<configuration>
 					<suppress>
 						<race>com.vmlens.examples.config.TestSuppressDataRaceAtField.i</race>
-						<race>int[]@com.vmlens.examples.config.TestSuppressArrayWithAt.updateArray</race>
+						<race>int[]@com.vmlens.examples.config.TestSuppressPrimitiveArrayWithAt.updateArray</race>
+						<race>java.lang.String[]@com.vmlens.examples.config.TestSuppressArrayWithAtAndPattern.*</race>
 					</suppress>
 				</configuration>
 				<executions>
