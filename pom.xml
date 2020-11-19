@@ -78,7 +78,7 @@
 						<race>java.lang.String[]@com.vmlens.examples.config.TestSuppressArrayWithAtAndPattern.*</race>
 					</suppress>
 					
-					<deadlockAndDataRaceDetection>false</deadlockAndDataRaceDetection>
+
 									
 				</configuration>
 				<executions>
