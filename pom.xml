@@ -5,7 +5,7 @@
 
 	<groupId>com.vmlens</groupId>
 	<artifactId>vmlens-examples</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.2</version>
 	<packaging>jar</packaging>
 
 	<name>vmlens-examples</name>
@@ -77,6 +77,9 @@
 						<race>int[]@com.vmlens.examples.config.TestSuppressPrimitiveArrayWithAt.updateArray</race>
 						<race>java.lang.String[]@com.vmlens.examples.config.TestSuppressArrayWithAtAndPattern.*</race>
 					</suppress>
+					
+					<deadlockAndDataRaceDetection>false</deadlockAndDataRaceDetection>
+									
 				</configuration>
 				<executions>
 					<execution>
