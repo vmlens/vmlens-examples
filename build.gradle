@@ -1,0 +1,37 @@
+plugins {
+  id "com.vmlens.interleave" version "1.1.4"
+}
+
+apply plugin: 'java-library'
+
+
+
+
+
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+
+
+    testImplementation ('junit:junit:4.12')
+    
+    testImplementation('com.vmlens:api:1.1.4' )
+}
+
+
+interleave {
+    suppress 'com.vmlens.test.atomic.fixed.TestForEach.i'
+    suppress 'com.vmlens.test.atomic.fixed.TestRaceBetweenAtomicTwoThreads.i'
+    suppress 'com.vmlens.test.atomic.fixed.TestRaceBetweenTwoAtomic.*' 
+}
+
+
+
+
+
+
