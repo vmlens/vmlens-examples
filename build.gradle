@@ -1,5 +1,5 @@
 plugins {
-  id "com.vmlens.interleave" version "1.1.4"
+  id "com.vmlens.interleave" version "1.1.5"
 }
 
 apply plugin: 'java-library'
@@ -20,7 +20,7 @@ dependencies {
 
     testImplementation ('junit:junit:4.12')
     
-    testImplementation('com.vmlens:api:1.1.4' )
+    testImplementation('com.vmlens:api:1.1.5' )
 }
 
 
@@ -28,6 +28,8 @@ interleave {
     suppress 'com.vmlens.test.atomic.fixed.TestForEach.i'
     suppress 'com.vmlens.test.atomic.fixed.TestRaceBetweenAtomicTwoThreads.i'
     suppress 'com.vmlens.test.atomic.fixed.TestRaceBetweenTwoAtomic.*' 
+    
+    onlyTraceIn 'com.vmlens.test.atomic.fixed.**'
 }
 
 
