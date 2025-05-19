@@ -38,3 +38,5 @@ build/*
 lib/*
 _dist/*
 agent_lib/*
+
+.idea/*
