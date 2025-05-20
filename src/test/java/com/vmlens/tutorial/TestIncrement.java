@@ -1,6 +1,7 @@
 package com.vmlens.tutorial;
 
-import com.vmlens.api.AllInterleaving;
+import com.vmlens.api.AllInterleavings;
+
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -8,12 +9,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestIncrement {
 
-    private volatile int j = 0;
+    private int j = 0;
 
     @Test
-    public void testReadWrite() throws InterruptedException {
-        try(AllInterleaving allInterleaving = new AllInterleaving("testIncrement")) {
-            while (allInterleaving.hasNext()) {
+    public void testIncrement() throws InterruptedException {
+        try(AllInterleavings allInterleavings = new AllInterleavings("tutorial")) {
+            while (allInterleavings.hasNext()) {
                 j = 0;
                 Thread first = new Thread() {
                     @Override
