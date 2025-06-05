@@ -1,4 +1,4 @@
-Examples showing how to use vmlens to write multi-threaded tests for the JVM.
+Examples showing how to use VMLens to write multi-threaded tests for the JVM.
 
 Includes the following examples:
 
