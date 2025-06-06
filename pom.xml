@@ -12,13 +12,14 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <vmlens.version>1.2.3</vmlens.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.vmlens</groupId>
       <artifactId>api</artifactId>
-      <version>1.2.2</version>
+      <version>${vmlens.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -54,7 +55,7 @@
       <plugin>
         <groupId>com.vmlens</groupId>
         <artifactId>vmlens-maven-plugin</artifactId>
-        <version>1.2.2</version>
+        <version>${vmlens.version}</version>
         <executions>
           <execution>
             <id>test</id>
