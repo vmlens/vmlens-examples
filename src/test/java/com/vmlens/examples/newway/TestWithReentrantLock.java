@@ -16,7 +16,7 @@ public class TestWithReentrantLock {
 
     @Test
     public void testIncrement() throws InterruptedException {
-        try(AllInterleavings allInterleavings = new AllInterleavings("testWithReentrantLock")) {
+        try(AllInterleavings allInterleavings = new AllInterleavings("newway.testWithReentrantLock")) {
             while (allInterleavings.hasNext()) {
                 j = 0;
                 Thread first = new Thread() {
