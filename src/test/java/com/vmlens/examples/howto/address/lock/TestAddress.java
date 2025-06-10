@@ -1,4 +1,4 @@
-package com.vmlens.examples.howto.entity.volatilefield;
+package com.vmlens.examples.howto.address.lock;
 
 import com.vmlens.api.AllInterleavings;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ public class TestAddress {
 
     @Test
     public void readWrite() throws InterruptedException {
-        try(AllInterleavings allInterleavings = new AllInterleavings("howto.entity.volatileFieldReadWrite")) {
+        try(AllInterleavings allInterleavings = new AllInterleavings("howto.address.lockReadWrite")) {
             while (allInterleavings.hasNext()) {
                 // Given
                 Address address = new Address("First Street", "First City");
@@ -20,12 +20,11 @@ public class TestAddress {
                 Thread first = new Thread() {
                     @Override
                     public void run() {
-                        address.setStreet("Second Street");
-                        address.setCity("Second City");
+                        address.update("Second Street","Second City");
                     }
                 };
                 first.start();
-                String streetAndCity = address.getStreet() + ", " + address.getCity();
+                String streetAndCity = address.getStreetAndCity();;
                 first.join();
 
                 // Then
@@ -37,7 +36,7 @@ public class TestAddress {
 
     @Test
     public void writeWrite() throws InterruptedException {
-        try(AllInterleavings allInterleavings = new AllInterleavings("howto.entity.volatileFieldWriteWrite")) {
+        try(AllInterleavings allInterleavings = new AllInterleavings("howto.address.lockWriteWrite")) {
             while (allInterleavings.hasNext()) {
                 // Given
                 Address address = new Address("First Street", "First City");
@@ -46,17 +45,15 @@ public class TestAddress {
                 Thread first = new Thread() {
                     @Override
                     public void run() {
-                        address.setStreet("Second Street");
-                        address.setCity("Second City");
+                        address.update("Second Street","Second City");
                     }
                 };
                 first.start();
-                address.setStreet("Third Street");
-                address.setCity("Third City");
+                address.update("Third Street","Third City");
                 first.join();
 
                 // Then
-                String streetAndCity = address.getStreet() + ", " + address.getCity();
+                String streetAndCity = address.getStreetAndCity();
                 assertThat(streetAndCity,anyOf(is("Second Street, Second City"),
                         is("Third Street, Third City")));
             }

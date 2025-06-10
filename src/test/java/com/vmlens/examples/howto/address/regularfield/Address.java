@@ -1,4 +1,4 @@
-package com.vmlens.examples.howto.entity.atomic;
+package com.vmlens.examples.howto.address.regularfield;
 
 public class Address {
 
@@ -9,14 +9,12 @@ public class Address {
         this.street = street;
         this.city = city;
     }
-
-    public synchronized void update(String street, String city) {
+    public void update(String street, String city) {
         this.street = street;
         this.city = city;
     }
 
-    public synchronized String getStreetAndCity() {
+    public String getStreetAndCity() {
         return  street + ", " + city;
     }
-
 }
