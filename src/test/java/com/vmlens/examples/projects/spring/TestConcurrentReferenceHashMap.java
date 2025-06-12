@@ -1,15 +1,16 @@
 package com.vmlens.examples.projects.spring;
 
 import com.vmlens.api.AllInterleavings;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
 public class TestConcurrentReferenceHashMap {
 
-
+    @EnabledForJreRange(min = JRE.JAVA_24  )
     @Test
-    @Disabled
     public void readWrite() throws InterruptedException {
         try(AllInterleavings allInterleavings = new AllInterleavings("testConcurrentReferenceHashMap")) {
             while (allInterleavings.hasNext()) {
