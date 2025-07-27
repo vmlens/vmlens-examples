@@ -42,15 +42,15 @@ tasks.register("vmlensReport") {
             reportDirectory.toPath(),
             OnDescriptionAndLeftBeforeRightNoOp(), OnEventNoOp()
         ).process()
-
     }
 }
 
+
 tasks.test {
-    doFirst {
+    doFirst{
         val agentDirectory = File(buildDir, Setup.AGENT_DIRECTORY)
         val setup = Setup(agentDirectory, "").setup()
-        jvmArgs(setup.argLine())
+        jvmArgs = listOf(setup.argLine()) + (jvmArgs ?: listOf())
     }
     useJUnitPlatform()
     finalizedBy("vmlensReport")

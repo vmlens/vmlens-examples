@@ -41,6 +41,8 @@ public class AddressTest {
                 // Given
                 Address address = new Address("First Street", "First City");
 
+                int y = 0;
+
                 // When
                 Thread first = new Thread() {
                     @Override
