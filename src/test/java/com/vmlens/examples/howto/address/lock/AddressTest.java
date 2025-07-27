@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestAddress {
+public class AddressTest {
 
     @Test
     public void readWrite() throws InterruptedException {
