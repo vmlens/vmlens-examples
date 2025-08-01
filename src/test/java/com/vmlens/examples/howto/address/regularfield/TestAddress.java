@@ -36,7 +36,7 @@ public class TestAddress {
 
     @Test
     public void writeWrite() throws InterruptedException {
-        try(AllInterleavings allInterleavings = new AllInterleavings("howto.address.lockWriteWrite")) {
+        try(AllInterleavings allInterleavings = new AllInterleavings("howto.address.regularFieldWriteWrite")) {
             while (allInterleavings.hasNext()) {
                 // Given
                 Address address = new Address("First Street", "First City");
