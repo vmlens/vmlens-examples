@@ -34,4 +34,30 @@ public class TestAddress {
         }
     }
 
+    @Test
+    public void writeWrite() throws InterruptedException {
+        try(AllInterleavings allInterleavings = new AllInterleavings("howto.address.regularFieldWriteWrite")) {
+            while (allInterleavings.hasNext()) {
+                // Given
+                Address address = new Address("First Street", "First City");
+
+                // When
+                Thread first = new Thread() {
+                    @Override
+                    public void run() {
+                        address.update("Second Street","Second City");
+                    }
+                };
+                first.start();
+                address.update("Third Street","Third City");
+                first.join();
+
+                // Then
+                String streetAndCity = address.getStreetAndCity();
+                assertThat(streetAndCity,anyOf(is("Second Street, Second City"),
+                        is("Third Street, Third City")));
+            }
+        }
+    }
+
 }

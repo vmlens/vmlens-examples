@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestAddress {
+public class AddressTest {
 
     @Test
     public void readWrite() throws InterruptedException {
@@ -40,6 +40,8 @@ public class TestAddress {
             while (allInterleavings.hasNext()) {
                 // Given
                 Address address = new Address("First Street", "First City");
+
+                int y = 0;
 
                 // When
                 Thread first = new Thread() {
