@@ -21,7 +21,7 @@ dependencies {
 
 buildscript {
     repositories {
-        mavenLocal()
+        mavenCentral()
     }
     dependencies {
         classpath("com.vmlens:standalone:1.2.10")
@@ -38,6 +38,8 @@ tasks.test {
     doFirst{
         jvmArgs(VMLens().setup(layout.buildDirectory.getAsFile().get()))
     }
+    // VMLens currently does not work with jacoco
+    jvmArgumentProviders.removeIf { it::class.java.simpleName == "JacocoAgent" }
     useJUnitPlatform()
     finalizedBy("vmlensReport")
 }
