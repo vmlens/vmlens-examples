@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("com.vmlens:api:1.2.10")
+    testImplementation("com.vmlens:api:1.2.11")
     testImplementation("org.hamcrest:java-hamcrest:2.0.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
@@ -24,7 +24,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.vmlens:standalone:1.2.10")
+        classpath("com.vmlens:standalone:1.2.11")
     }
 }
 
