@@ -2,8 +2,6 @@ import com.vmlens.gradle.VMLens
 
 plugins {
     id("java")
-    id("maven-publish")
-    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 group = "com.vmlens"
@@ -15,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("com.vmlens:api:1.2.12")
+    testImplementation("com.vmlens:api:1.2.13")
     testImplementation("org.hamcrest:java-hamcrest:2.0.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
@@ -26,9 +24,10 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("com.vmlens:standalone:1.2.12")
+        classpath("com.vmlens:standalone:1.2.13")
     }
 }
+
 
 tasks.register("vmlensReport") {
     doLast {
