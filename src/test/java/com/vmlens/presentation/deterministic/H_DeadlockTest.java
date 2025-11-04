@@ -1,34 +1,28 @@
-package com.vmlens.examples.deadlock;
+package com.vmlens.presentation.deterministic;
 
 import com.vmlens.api.AllInterleavings;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class TestDeadlock {
+public class H_DeadlockTest {
 
-    Object LOCK_A = new Object();
-    Object LOCK_B = new Object();
+    private final Object LOCK_A = new Object();
+    private final Object LOCK_B = new Object();
 
-   @Disabled
+    @Disabled
     @Test
     public void readWrite() throws InterruptedException {
         try(AllInterleavings allInterleavings = new AllInterleavings("examples.deadlock")) {
             while (allInterleavings.hasNext()) {
-                // When
-                Thread first = new Thread() {
-                    @Override
-                    public void run() {
-                      synchronized (LOCK_A) {
-                          synchronized (LOCK_B) {
-
-                          }
-                      }
+                Thread first = new Thread(() -> {
+                    synchronized (LOCK_A) {
+                        synchronized (LOCK_B) {
+                        }
                     }
-                };
+                });
                 first.start();
                 synchronized (LOCK_B) {
                     synchronized (LOCK_A) {
-
                     }
                 }
                 first.join();
