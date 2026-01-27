@@ -8,11 +8,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestWithVolatileField {
 
-    private volatile int j = 0;
+    private  int j = 0;
 
     @Test
     public void testIncrement() throws InterruptedException {
-        try(AllInterleavings allInterleavings = new AllInterleavings("newway.testWithVolatileField")) {
+        try(AllInterleavings allInterleavings =
+                    new AllInterleavings("newway.testWithVolatileField")) {
             while (allInterleavings.hasNext()) {
                 j = 0;
                 Thread first = new Thread() {

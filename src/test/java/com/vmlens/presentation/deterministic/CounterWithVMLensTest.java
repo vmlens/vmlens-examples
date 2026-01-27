@@ -3,29 +3,31 @@ package com.vmlens.presentation.deterministic;
 import com.vmlens.api.AllInterleavings;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class C_AllInterleavingsCounterTest {
+public class CounterWithVMLensTest {
 
-    private volatile int j = 0;
+    AtomicInteger integer = new AtomicInteger();
 
     @Test
     public void testIncrement() throws InterruptedException {
         try(AllInterleavings allInterleavings =
-                    new AllInterleavings("xtremej.nondeterministic.increment")) {
+                    new AllInterleavings("yavaconf")) {
             while (allInterleavings.hasNext()) {
-                j = 0;
+                integer.set(0);
                 Thread first = new Thread() {
                     @Override
                     public void run() {
-                        j++;
+                        integer.incrementAndGet();
                     }
                 };
                 first.start();
-                j++;
+                integer.incrementAndGet();
                 first.join();
-                assertThat(j,is(2));
+                assertThat( integer.get(), is(2));
             }
         }
     }
