@@ -1,98 +1,210 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.vmlens</groupId>
-  <artifactId>vmlens-examples</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>vmlens-example</name>
-  <url>https://github.com/vmlens/vlmens</url>
-
-  <organization>
-    <name>vmlens</name>
-    <url>https://www.vmlens.com</url>
-  </organization>
-
-  <repositories>
-    <repository>
-      <name>Central Portal Snapshots</name>
-      <id>central-portal-snapshots</id>
-      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <vmlens.version>1.2.22</vmlens.version>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.vmlens</groupId>
-      <artifactId>api</artifactId>
-      <version>${vmlens.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>java-hamcrest</artifactId>
-      <version>2.0.0.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.12.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.12.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.youtrackdb</groupId>
-      <artifactId>youtrackdb-core</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
-        <configuration>
-          <skipTests>true</skipTests>
-        </configuration>
-      </plugin>
-      <plugin>
+    <parent>
         <groupId>com.vmlens</groupId>
-        <artifactId>vmlens-maven-plugin</artifactId>
-        <version>${vmlens.version}</version>
-        <executions>
-          <execution>
-            <id>test</id>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+        <artifactId>vmlens-example</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>automatic-tests</artifactId>
+    <name>automatic-tests</name>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>vmlens</name>
+        <url>https://www.vmlens.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Thomas Krieger</name>
+            <email>thomas.krieger@vmlens.com</email>
+            <organization>vmlens</organization>
+            <organizationUrl>https://www.vmlens.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:vmlens/vmlens.git</connection>
+        <developerConnection>scm:git:git@github.com:vmlens/vmlens.git</developerConnection>
+        <url>git@github.com:vmlens/vmlens.git</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lucene.version>9.7.0</lucene.version>
+        <vmlens.version>1.2.25-SNAPSHOT</vmlens.version>
+    </properties>
+
+    <dependencyManagement>
+    <dependencies>
+        <!-- compile (implementation) -->
+        <dependency>
+            <groupId>org.graalvm.js</groupId>
+            <artifactId>js-scriptengine</artifactId>
+            <version>23.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>23.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>23.1.1</version>
+        </dependency>
+
+        <!-- runtimeOnly -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.77.0</version>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>com.datastax.oss</groupId>
+            <artifactId>java-driver-core</artifactId>
+            <version>4.17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.4.240</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vmlens</groupId>
+            <artifactId>api</artifactId>
+            <version>${vmlens.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-inprocess</artifactId>
+            <version>1.77.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.77.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>1.77.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analysis-common</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>${lucene..ersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-client</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.13</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql-api_2.13</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.13</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>java-hamcrest</artifactId>
+            <version>2.0.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.20.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>cassandra</artifactId>
+            <version>1.19.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.12.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>kafka</artifactId>
+            <version>1.19.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.12.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+
+    </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>code-gen</module>
+        <module>test-util</module>
+        <module>api</module>
+    </modules>
 
 </project>

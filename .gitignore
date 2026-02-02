@@ -40,6 +40,7 @@ _dist/*
 agent_lib/*
 
 .idea/*
+*.iml
 
 # gradle
 .gradle
