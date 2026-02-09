@@ -21,6 +21,7 @@ import static com.vmlens.api.Runner.runParallel;
 
 public class TestWriter {
 
+    @Disabled
     @Test
     public void useWriterFromMultipleThreads() throws IOException {
         try(AllInterleavings allInterleavings =

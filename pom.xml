@@ -42,8 +42,8 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lucene.version>9.7.0</lucene.version>
-        <vmlens.version>1.2.25-SNAPSHOT</vmlens.version>
+        <lucene.version>10.3.2</lucene.version>
+        <vmlens.version>1.2.27-SNAPSHOT</vmlens.version>
     </properties>
 
     <dependencyManagement>
@@ -97,7 +97,30 @@
             <dependency>
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-clients</artifactId>
-                <version>3.6.1</version>
+                <version>4.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.13</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>4.3.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.27.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.cassandra</groupId>
+                <artifactId>cassandra-all</artifactId>
+                <version>5.0.6</version>
             </dependency>
 
             <dependency>
@@ -115,6 +138,27 @@
                 <artifactId>lucene-queryparser</artifactId>
                 <version>${lucene.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-test-framework</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-suggest</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analysis-common</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-icu</artifactId>
+                <version>8.11.4</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
@@ -146,6 +190,16 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>5.10.1</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>5.10.2</version>
             </dependency>
 
             <dependency>
@@ -191,6 +245,8 @@
     <modules>
         <module>automatic-tests</module>
         <module>projects</module>
+        <module>lucene</module>
+        <module>cassandra</module>
     </modules>
 
     <build>
@@ -223,6 +279,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
             </plugin>
         </plugins>
     </build>

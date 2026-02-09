@@ -12,7 +12,6 @@ public class TestTransactionStore {
     @Test
     public void testConcurrentBegin() throws InterruptedException {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .withMaximumIterations(5)
                 .build("h2TransactionStore")) {
             while (allInterleavings.hasNext()) {
                 final MVStore s = new MVStore.Builder().open();

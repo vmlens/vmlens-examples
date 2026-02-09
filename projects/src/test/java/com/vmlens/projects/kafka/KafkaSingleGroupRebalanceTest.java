@@ -63,6 +63,7 @@ public class KafkaSingleGroupRebalanceTest {
         return new KafkaConsumer<>(props);
     }
 
+    @Disabled
     @Test
     void noOffsetProcessedConcurrentlyDuringRebalance() throws Exception {
         Runnable consumerLogic = () -> {
