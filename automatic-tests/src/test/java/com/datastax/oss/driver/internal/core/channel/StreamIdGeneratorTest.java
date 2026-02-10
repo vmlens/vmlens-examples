@@ -22,7 +22,6 @@ public class StreamIdGeneratorTest {
                      new StreamIdGenerator(5))
                 .addWrite(StreamIdGenerator::preAcquire)
                 .runTests();
-
     }
 
 }

@@ -39,12 +39,8 @@ public class DefaultWriteCoalescerTest {
     public static void writeAndFlush(DefaultWriteCoalescer defaultWriteCoalescer) {
         Channel channel = mock(Channel.class);
         EventLoop eventLoop = mock(EventLoop.class);
-
         when(channel.eventLoop()).thenReturn(eventLoop);
-
-
         defaultWriteCoalescer.writeAndFlush(channel, "test");
     }
-
 
 }

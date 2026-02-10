@@ -30,7 +30,6 @@ public class AtomicTimestampGeneratorTest {
                 })
                 .addWrite(AtomicTimestampGenerator::next)
                 .runTests();
-
     }
 
 }

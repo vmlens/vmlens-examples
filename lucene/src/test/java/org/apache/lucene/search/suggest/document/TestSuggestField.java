@@ -38,6 +38,7 @@ import org.apache.lucene.tests.analysis.MockAnalyzer;
 import org.apache.lucene.tests.index.RandomIndexWriter;
 import org.apache.lucene.tests.util.LuceneTestCase;
 import org.apache.lucene.tests.util.TestUtil;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Set;
@@ -45,11 +46,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TestSuggestField extends LuceneTestCase {
 
-  //@Test
+  @Test
   public void testThreads() throws Exception {
 
     try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-            .build("lucene.testSuggestField")) {
+            .build("lucene.testThreads")) {
       while (allInterleavings.hasNext()) {
         Directory dir= newDirectory();
     final Analyzer analyzer = new MockAnalyzer(random());

@@ -35,6 +35,7 @@ import org.awaitility.Awaitility;
 import org.awaitility.core.ConditionFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.apache.cassandra.concurrent.ExecutorPlus;
@@ -80,7 +81,7 @@ public class LoadingMapTest
     public void loadForDifferentKeysShouldNotBlockEachOther() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.loadForDifferentKeysShouldNotBlockEachOther")) {
             while (allInterleavings.hasNext()) {
                 f1 = submitLoad(1, "one", b1, null);
                 await().untilAsserted(() -> assertThat(b1.getNumberWaiting()).isGreaterThan(0)); // wait until we enter loading function
@@ -115,7 +116,7 @@ public class LoadingMapTest
     public void loadInsideLoadShouldNotCauseDeadlock()
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.loadInsideLoadShouldNotCauseDeadlock")) {
             while (allInterleavings.hasNext()) {
         String v = map.blockingLoadIfAbsent(1, () -> {
             assertThat(map.blockingLoadIfAbsent(2, () -> "two")).isEqualTo("two");
@@ -136,7 +137,7 @@ public class LoadingMapTest
     public void unloadForDifferentKeysShouldNotBlockEachOther() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.unloadForDifferentKeysShouldNotBlockEachOther")) {
             while (allInterleavings.hasNext()) {
         initMap();
 
@@ -173,10 +174,9 @@ public class LoadingMapTest
     public void unloadInsideUnloadShouldNotCauseDeadlock() throws LoadingMap.UnloadExecutionException
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.unloadInsideUnloadShouldNotCauseDeadlock")) {
             while (allInterleavings.hasNext()) {
         initMap();
-
         String v = map.blockingUnloadIfPresent(1, v1 -> {
             assertThat(map.getIfReady(1)).isNull();
 
@@ -191,7 +191,6 @@ public class LoadingMapTest
         });
 
         assertThat(v).isEqualTo("one");
-
         assertThat(map.get(1)).isNull();
         assertThat(map.get(2)).isNull();
             }
@@ -202,7 +201,7 @@ public class LoadingMapTest
     public void twoConcurrentLoadAttemptsFirstOneShouldWin() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.twoConcurrentLoadAttemptsFirstOneShouldWin")) {
             while (allInterleavings.hasNext()) {
         f1 = submitLoad(1, "one", b1, null);
         await().untilAsserted(() -> assertThat(b1.getNumberWaiting()).isGreaterThan(0)); // wait until we enter loading function
@@ -226,7 +225,7 @@ public class LoadingMapTest
     public void twoConcurrentUnloadAttemptsFirstOneShouldWin() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.twoConcurrentUnloadAttemptsFirstOneShouldWin")) {
             while (allInterleavings.hasNext()) {
         initMap();
         f1 = submitUnload(1, "one", b1, null);
@@ -249,7 +248,7 @@ public class LoadingMapTest
     public void loadWhileUnloading() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.loadWhileUnloading")) {
             while (allInterleavings.hasNext()) {
         initMap();
 
@@ -274,7 +273,7 @@ public class LoadingMapTest
     public void unloadWhileLoading() throws Exception
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.unloadWhileLoading")) {
             while (allInterleavings.hasNext()) {
         f1 = submitLoad(1, "one", b1, null);
         await().untilAsserted(() -> assertThat(b1.getNumberWaiting()).isGreaterThan(0)); // wait until we enter loading function
@@ -298,7 +297,7 @@ public class LoadingMapTest
     public void failedUnload()
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.failedUnload")) {
             while (allInterleavings.hasNext()) {
         initMap();
 
@@ -318,7 +317,9 @@ public class LoadingMapTest
         }
             }
 
-    //@Test
+
+    @Test
+    @Ignore
     public void fuzzTest()
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()

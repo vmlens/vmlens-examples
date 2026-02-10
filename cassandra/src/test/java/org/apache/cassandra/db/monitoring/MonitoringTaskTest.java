@@ -107,11 +107,6 @@ public class MonitoringTaskTest
         }
     }
 
-    private static void waitForOperationsToBeReportedAsSlow(Monitorable... operations) throws InterruptedException
-    {
-        waitForOperationsToBeReportedAsSlow(Arrays.asList(operations));
-    }
-
     private static void waitForOperationsToBeReportedAsSlow(List<Monitorable> operations) throws InterruptedException
     {
         long timeout = operations.stream().map(Monitorable::slowTimeoutNanos).reduce(0L, Long::max);
@@ -126,15 +121,11 @@ public class MonitoringTaskTest
         }
     }
 
-
-
-
-
     @Test
     public void testMultipleThreads() throws InterruptedException
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.testMultipleThreads")) {
 
             while (allInterleavings.hasNext()) {
 
@@ -166,11 +157,9 @@ public class MonitoringTaskTest
     public void testMultipleThreadsSameNameFailed() throws InterruptedException
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.testMultipleThreadsSameNameFailed")) {
 
             while (allInterleavings.hasNext()) {
-
-
                 final int threadCount = 2;
                 final List<Monitorable> operations = new ArrayList<>(threadCount);
                 ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
@@ -204,7 +193,7 @@ public class MonitoringTaskTest
     public void testMultipleThreadsSameNameSlow() throws InterruptedException
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
+                .build("cassandra.testMultipleThreadsSameNameSlow")) {
 
             while (allInterleavings.hasNext()) {
 
@@ -225,8 +214,7 @@ public class MonitoringTaskTest
                                                             slowTimeout);
                     operations.add(operation);
                 }
-                finally
-                {
+                finally {
                     finished.countDown();
                 }
             });
@@ -247,8 +235,7 @@ public class MonitoringTaskTest
     public void testMultipleThreadsNoFailedOps() throws InterruptedException
     {
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("lucene.testAddIndexesAndDoDeletesThreads")) {
-
+                .build("cassandra.testMultipleThreadsNoFailedOps")) {
             while (allInterleavings.hasNext()) {
         final int threadCount = 2;
         final List<Monitorable> operations = new ArrayList<>(threadCount);
@@ -274,7 +261,6 @@ public class MonitoringTaskTest
                 }
             });
         }
-
         finished.await();
         assertEquals(0, executorService.shutdownNow().size());
 

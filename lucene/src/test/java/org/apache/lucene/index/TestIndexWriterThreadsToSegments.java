@@ -51,7 +51,7 @@ public class TestIndexWriterThreadsToSegments extends LuceneTestCase {
   public void testSegmentCountOnFlushBasic() throws Exception {
     try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
             .withMaximumIterations(1)
-            .build("lucene.testRandomPostings")) {
+            .build("lucene.testSegmentCountOnFlushBasic")) {
       while (allInterleavings.hasNext()) {
     Directory dir = newDirectory();
     final IndexWriter w = new IndexWriter(dir, new IndexWriterConfig(new MockAnalyzer(random())));
@@ -170,7 +170,7 @@ public class TestIndexWriterThreadsToSegments extends LuceneTestCase {
   public void testSegmentCountOnFlushRandom() throws Exception {
     try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
             .withMaximumIterations(1)
-            .build("lucene.testDocsStuckInRAMForever")) {
+            .build("lucene.testSegmentCountOnFlushRandom")) {
       while (allInterleavings.hasNext()) {
     Directory dir = newFSDirectory(createTempDir());
     IndexWriterConfig iwc = new IndexWriterConfig(new MockAnalyzer(random()));
@@ -255,7 +255,7 @@ public class TestIndexWriterThreadsToSegments extends LuceneTestCase {
   public void testManyThreadsClose() throws Exception {
     try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
             .withMaximumIterations(1)
-            .build("lucene.testDocsStuckInRAMForever")) {
+            .build("lucene.testManyThreadsClose")) {
       while (allInterleavings.hasNext()) {
     Directory dir = newDirectory();
     Random r = random();

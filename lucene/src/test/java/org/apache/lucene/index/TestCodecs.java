@@ -217,7 +217,7 @@ public class TestCodecs extends LuceneTestCase {
   }
 
 
-  public void doNotTestRandomPostings() throws Throwable {
+  public void doNottestRandomPostings() throws Throwable {
     try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
             .build("lucene.testRandomPostings")) {
       while (allInterleavings.hasNext()) {
