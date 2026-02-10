@@ -44,7 +44,7 @@ public class QuestDbTest {
         connection.close();
     }
 
-    //@Test
+    @Test
     void shouldInsertAndQueryData() throws Exception {
         try (Statement stmt = connection.createStatement()) {
 

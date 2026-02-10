@@ -63,7 +63,7 @@ public class KafkaSingleGroupRebalanceTest {
         return new KafkaConsumer<>(props);
     }
 
-    @Disabled
+
     @Test
     void noOffsetProcessedConcurrentlyDuringRebalance() throws Exception {
         Runnable consumerLogic = () -> {
@@ -86,7 +86,8 @@ public class KafkaSingleGroupRebalanceTest {
 
         try (AllInterleavings allInterleavings =
                      new AllInterleavingsBuilder().withRemoveCycleThreshold(5)
-                             .withMaximumIterations(1).build("kafka-rebalance")) {
+                             .withMaximumIterations(1)
+                             .build("kafka-rebalance")) {
             while (allInterleavings.hasNext()) {
                 runParallel(
                         consumerLogic,

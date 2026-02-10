@@ -21,9 +21,7 @@ import static com.vmlens.api.Runner.runParallel;
 
 public class SparkTestcontainersTest {
 
-
-
-    //@Test
+    @Test
     void shouldRunSimpleSparkJob() throws URISyntaxException {
         URL absoluteResource = SparkTestcontainersTest.class.getResource("/spark.txt");
         SparkSession spark = SparkSession.builder().master("local[2]").appName("Simple Application").getOrCreate();

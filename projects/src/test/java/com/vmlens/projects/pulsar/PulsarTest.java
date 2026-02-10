@@ -50,7 +50,6 @@ class PulsarTest {
         }
     }
 
-    @Disabled
     @Test
     void shouldProduceAndConsumeMessage() throws Exception {
         String topic = "persistent://public/default/test-topic";
