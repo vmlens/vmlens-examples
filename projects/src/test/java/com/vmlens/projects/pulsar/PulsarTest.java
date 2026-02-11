@@ -104,9 +104,6 @@ class PulsarTest {
             }
 
         }
-
-
-
         producer.close();
         consumer.close();
     }

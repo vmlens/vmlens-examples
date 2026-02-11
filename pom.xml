@@ -57,6 +57,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast</artifactId>
+                <version>5.6.0</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.grpc</groupId>
                 <artifactId>grpc-netty-shaded</artifactId>
                 <version>1.79.0</version>
@@ -158,28 +164,10 @@
                 <artifactId>lucene-analyzers-icu</artifactId>
                 <version>8.11.4</version>
             </dependency>
-
-
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
                 <artifactId>pulsar-client</artifactId>
                 <version>4.1.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-core_2.13</artifactId>
-                <version>4.2.0-preview1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-sql-api_2.13</artifactId>
-                <version>4.2.0-preview1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-sql_2.13</artifactId>
-                <version>4.2.0-preview1</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
