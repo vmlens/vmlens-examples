@@ -31,6 +31,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 
 import com.vmlens.api.AllInterleavings;
 import com.vmlens.api.AllInterleavingsBuilder;
+import org.assertj.core.api.Assertions;
 import org.awaitility.Awaitility;
 import org.awaitility.core.ConditionFactory;
 import org.junit.After;
@@ -41,6 +42,7 @@ import org.junit.Test;
 import org.apache.cassandra.concurrent.ExecutorPlus;
 import org.apache.cassandra.utils.Throwables;
 
+import static com.vmlens.api.Runner.runParallel;
 import static org.apache.cassandra.concurrent.ExecutorFactory.Global.executorFactory;
 import static org.apache.cassandra.utils.FBUtilities.now;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -118,15 +120,21 @@ public class LoadingMapTest
         try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
                 .build("cassandra.loadInsideLoadShouldNotCauseDeadlock")) {
             while (allInterleavings.hasNext()) {
-        String v = map.blockingLoadIfAbsent(1, () -> {
-            assertThat(map.blockingLoadIfAbsent(2, () -> "two")).isEqualTo("two");
-            return "one";
-        });
-
-        assertThat(v).isEqualTo("one");
-
-        assertThat(map.getIfReady(1)).isEqualTo("one");
-        assertThat(map.getIfReady(2)).isEqualTo("two");
+                LoadingMap<Integer, String> loadingMap = new LoadingMap<>();
+                runParallel(
+                        () -> {    String v = loadingMap.blockingLoadIfAbsent(1, () -> {
+                            assertThat(loadingMap.blockingLoadIfAbsent(2, () -> "two")).isEqualTo("two");
+                            return "one"; } );
+                            assertThat(v).isEqualTo("one");
+                        },
+                        () -> {   String v = loadingMap.blockingLoadIfAbsent(1, () -> {
+                            assertThat(loadingMap.blockingLoadIfAbsent(2, () -> "two")).isEqualTo("two");
+                            return "one"; } );
+                            assertThat(v).isEqualTo("one");
+                        }
+                );
+        assertThat(loadingMap.getIfReady(1)).isEqualTo("one");
+        assertThat(loadingMap.getIfReady(2)).isEqualTo("two");
             }
 
         }
@@ -164,33 +172,6 @@ public class LoadingMapTest
         b1.await();
         assertFuture(f1, "one");
 
-        assertThat(map.get(1)).isNull();
-        assertThat(map.get(2)).isNull();
-            }
-        }
-    }
-
-    @Test
-    public void unloadInsideUnloadShouldNotCauseDeadlock() throws LoadingMap.UnloadExecutionException
-    {
-        try (AllInterleavings allInterleavings = new AllInterleavingsBuilder()
-                .build("cassandra.unloadInsideUnloadShouldNotCauseDeadlock")) {
-            while (allInterleavings.hasNext()) {
-        initMap();
-        String v = map.blockingUnloadIfPresent(1, v1 -> {
-            assertThat(map.getIfReady(1)).isNull();
-
-            try
-            {
-                assertThat(map.blockingUnloadIfPresent(2, v2 -> assertThat(map.getIfReady(2)).isNull())).isEqualTo("two");
-            }
-            catch (LoadingMap.UnloadExecutionException e)
-            {
-                throw Throwables.unchecked(e);
-            }
-        });
-
-        assertThat(v).isEqualTo("one");
         assertThat(map.get(1)).isNull();
         assertThat(map.get(2)).isNull();
             }

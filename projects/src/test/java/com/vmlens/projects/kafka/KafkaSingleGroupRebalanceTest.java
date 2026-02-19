@@ -85,7 +85,7 @@ public class KafkaSingleGroupRebalanceTest {
         producer.flush();
 
         try (AllInterleavings allInterleavings =
-                     new AllInterleavingsBuilder().withRemoveCycleThreshold(5)
+                     new AllInterleavingsBuilder()
                              .withMaximumIterations(1)
                              .build("kafka-rebalance")) {
             while (allInterleavings.hasNext()) {
