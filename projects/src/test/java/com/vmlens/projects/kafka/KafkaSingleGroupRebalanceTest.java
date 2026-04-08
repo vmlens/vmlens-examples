@@ -83,7 +83,6 @@ public class KafkaSingleGroupRebalanceTest {
             producer.send(new ProducerRecord<>(TOPIC, "k", "msg-" + i));
         }
         producer.flush();
-
         try (AllInterleavings allInterleavings =
                      new AllInterleavingsBuilder()
                              .withMaximumIterations(1)

@@ -64,7 +64,7 @@ class CassandraIntegrationTest {
         createSchema(session);
         try (AllInterleavings allInterleavings =
                      new AllInterleavingsBuilder()
-                             .withMaximumIterations(2000)
+                             .withMaximumIterations(5000)
                              .build("cassandra")) {
             while (allInterleavings.hasNext()) {
                 runParallel(

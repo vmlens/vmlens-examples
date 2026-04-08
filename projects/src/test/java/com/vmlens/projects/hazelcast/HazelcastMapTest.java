@@ -15,7 +15,6 @@ class HazelcastMapTest {
 
     private Config config;
 
-
     @BeforeEach
     void setUp() {
         config = new Config();
@@ -24,8 +23,6 @@ class HazelcastMapTest {
         // Disable networking to keep it fully local
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
         config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
-
-
     }
 
     @Test
@@ -33,16 +30,16 @@ class HazelcastMapTest {
         HazelcastInstance hazelcast = Hazelcast.newHazelcastInstance(config);
         IMap<Integer, String> map = hazelcast.getMap("test-map");
         int key = 0;
-        try(AllInterleavings allInterleavings =
-                    new AllInterleavingsBuilder()
-                            .build("hazelcast,put")) {
-            while(allInterleavings.hasNext()) {
-            runParallel(() -> {
-                        map.put(key,"");
-            }, () -> {
-                map.put(key,"");
-                    }
-            );
+        try (AllInterleavings allInterleavings =
+                     new AllInterleavingsBuilder()
+                             .build("hazelcast,put")) {
+            while (allInterleavings.hasNext()) {
+                runParallel(() -> {
+                            map.put(key, "");
+                        }, () -> {
+                            map.put(key, "");
+                        }
+                );
             }
         }
         Hazelcast.shutdownAll();
@@ -53,19 +50,19 @@ class HazelcastMapTest {
         HazelcastInstance hazelcast = Hazelcast.newHazelcastInstance(config);
         IMap<Integer, String> map = hazelcast.getMap("test-map");
         int key = 0;
-        try(AllInterleavings allInterleavings =
-                    new AllInterleavingsBuilder()
-                            .build("hazelcast.putGet")) {
-        while(allInterleavings.hasNext()) {
-            runParallel(() -> {
-                        map.put(key,"");
-                    }, () -> {
-                        map.get(key);
-                    }
-            );
+        try (AllInterleavings allInterleavings =
+                     new AllInterleavingsBuilder()
+                             .build("hazelcast.putGet")) {
+            while (allInterleavings.hasNext()) {
+                runParallel(() -> {
+                            map.put(key, "");
+                        }, () -> {
+                            map.get(key);
+                        }
+                );
+            }
+            Hazelcast.shutdownAll();
         }
-        Hazelcast.shutdownAll();
-    }
     }
 
 }

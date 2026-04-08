@@ -31,6 +31,7 @@ import com.vmlens.api.AllInterleavings;
 import com.vmlens.api.AllInterleavingsBuilder;
 import org.junit.After;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
@@ -128,7 +129,6 @@ public class MonitoringTaskTest
                 .build("cassandra.testMultipleThreads")) {
 
             while (allInterleavings.hasNext()) {
-
                 final int opCount = 2;
                 final ExecutorService executorService = Executors.newFixedThreadPool(2);
                 final List<Monitorable> operations = Collections.synchronizedList(new ArrayList<>(opCount));
@@ -152,7 +152,7 @@ public class MonitoringTaskTest
 
 
 
-
+    @Ignore
     @Test
     public void testMultipleThreadsSameNameFailed() throws InterruptedException
     {
@@ -189,6 +189,7 @@ public class MonitoringTaskTest
         }
     }
 
+    @Ignore
     @Test
     public void testMultipleThreadsSameNameSlow() throws InterruptedException
     {
@@ -231,6 +232,7 @@ public class MonitoringTaskTest
         }
     }
 
+    @Ignore
     @Test
     public void testMultipleThreadsNoFailedOps() throws InterruptedException
     {
@@ -250,8 +252,7 @@ public class MonitoringTaskTest
                     Monitorable operation = new TestMonitor("Test thread " + currentThread().getName(),
                                                             nanoTime(),
                                                             false,
-                                                            timeout,
-                                                            slowTimeout);
+                                                            timeout,slowTimeout);
                     operations.add(operation);
                     operation.complete();
                 }

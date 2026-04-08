@@ -4,7 +4,7 @@ import com.datastax.oss.driver.api.core.config.DriverConfig;
 import com.datastax.oss.driver.api.core.config.DriverExecutionProfile;
 import com.datastax.oss.driver.api.core.context.DriverContext;
 import com.datastax.oss.driver.internal.core.channel.DefaultWriteCoalescer;
-import com.vmlens.api.atomic.AtomicTestBuilder;
+import com.vmlens.api.testbuilder.AtomicTestBuilder;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoop;
 import org.junit.jupiter.api.Test;

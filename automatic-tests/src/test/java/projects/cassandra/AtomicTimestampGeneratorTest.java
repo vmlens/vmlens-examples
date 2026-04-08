@@ -4,7 +4,7 @@ import com.datastax.oss.driver.api.core.config.DriverConfig;
 import com.datastax.oss.driver.api.core.config.DriverExecutionProfile;
 import com.datastax.oss.driver.api.core.context.DriverContext;
 import com.datastax.oss.driver.internal.core.time.AtomicTimestampGenerator;
-import com.vmlens.api.atomic.AtomicTestBuilder;
+import com.vmlens.api.testbuilder.AtomicTestBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
