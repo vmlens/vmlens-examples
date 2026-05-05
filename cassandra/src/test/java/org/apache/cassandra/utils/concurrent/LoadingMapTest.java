@@ -79,7 +79,6 @@ public class LoadingMapTest
         f1 = f2 = null;
     }
 
-    @Ignore
     @Test
     public void loadForDifferentKeysShouldNotBlockEachOther() throws Exception
     {
@@ -115,7 +114,7 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
+
     @Test
     public void loadInsideLoadShouldNotCauseDeadlock()
     {
@@ -143,7 +142,6 @@ public class LoadingMapTest
 
     }
 
-    @Ignore
     @Test
     public void unloadForDifferentKeysShouldNotBlockEachOther() throws Exception
     {
@@ -181,7 +179,6 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
     @Test
     public void twoConcurrentLoadAttemptsFirstOneShouldWin() throws Exception
     {
@@ -206,7 +203,6 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
     @Test
     public void twoConcurrentUnloadAttemptsFirstOneShouldWin() throws Exception
     {
@@ -230,7 +226,6 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
     @Test
     public void loadWhileUnloading() throws Exception
     {
@@ -256,7 +251,6 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
     @Test
     public void unloadWhileLoading() throws Exception
     {
@@ -280,7 +274,6 @@ public class LoadingMapTest
         }
     }
 
-    @Ignore
     @Test
     public void failedUnload()
     {
@@ -303,10 +296,10 @@ public class LoadingMapTest
         assertThat(map.get(1)).isNull();
             }
         }
-            }
+    }
 
 
-    @Test
+
     @Ignore
     public void fuzzTest()
     {
