@@ -13,15 +13,15 @@ public class FieldTest {
     //@Disabled
     @Test
     public void testUpdate() throws InterruptedException {
-        AllInterleavings testUpdate = new AllInterleavings("FieldTest");
-        while (testUpdate.hasNext()) {
-            j = 0;
-            Thread first = new Thread(() -> j++);
-            first.start();
-            j++;
-            first.join();
-            assertEquals(2,j);
+        try (AllInterleavings testUpdate = new AllInterleavings("FieldTest")) {
+            while (testUpdate.hasNext()) {
+                j = 0;
+                Thread first = new Thread(() -> j++);
+                first.start();
+                j++;
+                first.join();
+                assertEquals(2, j);
+            }
         }
     }
-
 }
